@@ -1,18 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
+import { createSlice } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
 
 const initialState = {
   todos: [
-    { id: nanoid(), content: "redux-1", isDone: false, totalTime: 0 },
-    { id: nanoid(), content: "redux-2", isDone: false, totalTime: 0 },
-    { id: nanoid(), content: "redux-3", isDone: true, totalTime: 0 },
+    { id: nanoid(), content: 'redux-1', isDone: false, totalTime: 0 },
+    { id: nanoid(), content: 'redux-2', isDone: false, totalTime: 0 },
+    { id: nanoid(), content: 'redux-3', isDone: true, totalTime: 0 },
   ],
-  selectedTodo: { id: 0, content: "", isDone: false, totalTime: 0 },
+  selectedTodo: { id: 0, content: '', isDone: false, totalTime: 0 },
   isModalOpen: false,
 };
 
 export const todoSlice = createSlice({
-  name: "todo",
+  name: 'todo',
   initialState,
   reducers: {
     addTodo: (state, action) => {
@@ -22,7 +22,7 @@ export const todoSlice = createSlice({
         isDone: false,
         totalTime: 0,
       };
-      return [...state.todos, newTodo];
+      return { ...initialState, todos: [...state.todos, newTodo] };
     },
     deleteTodo: (state, action) => {
       return state.todos.filter((todo) => todo.id !== action.payload);
@@ -48,12 +48,7 @@ export const todoSlice = createSlice({
   },
 });
 
-export const {
-  addTodo,
-  deleteTodo,
-  changeIsDone,
-  selectTodo,
-} = todoSlice.actions;
+export const { addTodo, deleteTodo, changeIsDone, selectTodo } = todoSlice.actions;
 
 export const selectTodos = (state) => state.todo.todos;
 
