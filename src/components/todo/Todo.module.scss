@@ -1,0 +1,17 @@
+.root {
+  background: #84f7b0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    height: 80vh;
+    width: 70vw;
+    border-radius: 10px;
+    background: #f1f2f7;
+    padding: 10px 40px;
+    text-align: center;
+  }
+}

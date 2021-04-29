@@ -1,0 +1,16 @@
+.root {
+  height: 120px;
+  overflow: hidden;
+  overflow-y: scroll;
+
+  .todo_content {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .todo_text {
+      display: inline-block;
+    }
+  }
+}
