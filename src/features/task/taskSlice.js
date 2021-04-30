@@ -22,13 +22,14 @@ export const todoSlice = createSlice({
         isDone: false,
         totalTime: 0,
       };
-      return [...state.todos, newTodo];
+      state.todos = [...state.todos, newTodo];
+      // return { ...initialState, todos: [...state.todos, newTodo] };
     },
     deleteTodo: (state, action) => {
-      return state.todos.filter((todo) => todo.id !== action.payload);
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
     changeIsDone: (state, action) => {
-      return state.todos.map((todo) => {
+      state.todos = state.todos.map((todo) => {
         if (todo.id === action.payload) {
           return {
             ...todo,
