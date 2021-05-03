@@ -1,27 +1,34 @@
 import React from "react";
 import styles from "./TodoArea.module.scss";
-import {
-  useDispatch,
-  //  useSelector
-} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   deleteTodo,
   changeIsDone,
-  // selectIsModalOpen,
+  handleModalOpen,
+  selectIsModalOpen,
+  selectTodo,
+  selectSelectedTodo,
 } from "../../features/task/taskSlice";
 
-import {
-  Typography,
-  IconButton,
-  //  Modal
-} from "@material-ui/core";
+import Timer from "../timer/Timer";
+import { Typography, IconButton, Modal } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import DeleteIcon from "@material-ui/icons/Delete";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 
 const TodoArea = ({ notFinishTodos }) => {
   const dispatch = useDispatch();
-  // const isModalOpen = useSelector(selectIsModalOpen);
+  const selectedTodo = useSelector(selectSelectedTodo);
+  const isModalOpen = useSelector(selectIsModalOpen);
+
+  const handleOpen = (todo) => {
+    dispatch(selectTodo(todo));
+    dispatch(handleModalOpen(true));
+  };
+
+  const handleClose = () => {
+    dispatch(handleModalOpen(false));
+  };
 
   return (
     <div>
@@ -34,7 +41,7 @@ const TodoArea = ({ notFinishTodos }) => {
                 <Typography className={styles.todo_text}>
                   {todo.content}
                 </Typography>
-                <IconButton onClick={() => console.log("test")}>
+                <IconButton onClick={() => handleOpen(todo)}>
                   <QueryBuilderIcon />
                 </IconButton>
                 <IconButton onClick={() => dispatch(changeIsDone(todo.id))}>
@@ -44,7 +51,16 @@ const TodoArea = ({ notFinishTodos }) => {
                   <DeleteIcon />
                 </IconButton>
               </div>
-              {/* <Modal></Modal> */}
+              <Modal
+                className={styles.modal}
+                open={isModalOpen}
+                onClose={handleClose}
+              >
+                <div className={styles.modal_content}>
+                  <Typography>{selectedTodo.content}</Typography>
+                  <Timer todo={todo} />
+                </div>
+              </Modal>
             </div>
           );
         })}

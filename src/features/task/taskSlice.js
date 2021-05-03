@@ -44,7 +44,21 @@ export const todoSlice = createSlice({
       state.isModalOpen = action.payload;
     },
     selectTodo: (state, action) => {
-      state.selectedTodo = action.payload;
+      state.selectedTodo = { ...action.payload, totalTime: 0 };
+    },
+    addTime: (state, action) => {
+      state.selectedTodo.totalTime += action.payload;
+    },
+    resetTime: (state) => {
+      state.selectedTodo.totalTime = 0;
+    },
+    totalTimeSum: (state, action) => {
+      // state.todosの中から指定のtodosを抜き出す
+      const todo = state.todos.find((t) => t.id === action.payload.id);
+      // 抜き出したtodoのをtotalTime変更する
+      if (todo) {
+        todo.totalTime += action.payload.totalTime;
+      }
     },
   },
 });
@@ -53,7 +67,11 @@ export const {
   addTodo,
   deleteTodo,
   changeIsDone,
+  handleModalOpen,
   selectTodo,
+  addTime,
+  resetTime,
+  totalTimeSum,
 } = todoSlice.actions;
 
 export const selectTodos = (state) => state.todo.todos;

@@ -9,7 +9,6 @@ import { selectTodos } from "../../features/task/taskSlice";
 const Todo = () => {
   // const { todos } = useSelector((state) => state.todo);
   const todos = useSelector(selectTodos);
-  console.log(todos);
 
   const notFinishTodos = todos.filter((todo) => {
     return todo.isDone === false;
