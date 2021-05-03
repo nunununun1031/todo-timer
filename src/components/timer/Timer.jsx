@@ -93,6 +93,7 @@ const Timer = ({ todo }) => {
 
   return (
     <div className={styles.root}>
+      <Typography>{selectedTodo.content}</Typography>
       <Typography>がんばり時間</Typography>
       <Typography>合計: {timeChange(todo.totalTime)}分</Typography>
       <br />

@@ -57,7 +57,6 @@ const TodoArea = ({ notFinishTodos }) => {
                 onClose={handleClose}
               >
                 <div className={styles.modal_content}>
-                  <Typography>{selectedTodo.content}</Typography>
                   <Timer todo={todo} />
                 </div>
               </Modal>
