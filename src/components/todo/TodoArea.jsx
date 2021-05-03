@@ -7,7 +7,6 @@ import {
   handleModalOpen,
   selectIsModalOpen,
   selectTodo,
-  selectSelectedTodo,
 } from "../../features/task/taskSlice";
 
 import Timer from "../timer/Timer";
@@ -18,7 +17,6 @@ import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 
 const TodoArea = ({ notFinishTodos }) => {
   const dispatch = useDispatch();
-  const selectedTodo = useSelector(selectSelectedTodo);
   const isModalOpen = useSelector(selectIsModalOpen);
 
   const handleOpen = (todo) => {
