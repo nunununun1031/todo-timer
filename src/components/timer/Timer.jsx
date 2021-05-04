@@ -6,6 +6,7 @@ import {
   selectSelectedTodo,
   totalTimeSum,
   resetTime,
+  selectTodos,
 } from "../../features/task/taskSlice";
 import { Button, Typography } from "@material-ui/core";
 
@@ -13,9 +14,14 @@ const twentyFive = 25 * 60 * 1000;
 const five = 5 * 60 * 1000;
 const one = 1 * 60 * 1000;
 
-const Timer = ({ todo }) => {
-  const selectedTodo = useSelector(selectSelectedTodo);
+const Timer = () => {
   const dispatch = useDispatch();
+  const selectedTodo = useSelector(selectSelectedTodo);
+  const todos = useSelector(selectTodos);
+
+  const todo = todos.find((t) => {
+    return t.id === selectedTodo.id;
+  });
 
   const [count, setCount] = useState(0);
   const intervalRef = useRef(null); //1
@@ -96,6 +102,7 @@ const Timer = ({ todo }) => {
       <Typography>{selectedTodo.content}</Typography>
       <Typography>がんばり時間</Typography>
       <Typography>合計: {timeChange(todo.totalTime)}分</Typography>
+
       <br />
       <Typography>残り時間</Typography>
       {intervalRef.current > 0 || intervalRef.current === null ? (

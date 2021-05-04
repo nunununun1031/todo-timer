@@ -49,18 +49,18 @@ const TodoArea = ({ notFinishTodos }) => {
                   <DeleteIcon />
                 </IconButton>
               </div>
-              <Modal
-                className={styles.modal}
-                open={isModalOpen}
-                onClose={handleClose}
-              >
-                <div className={styles.modal_content}>
-                  <Timer todo={todo} />
-                </div>
-              </Modal>
             </div>
           );
         })}
+        <Modal
+          className={styles.modal}
+          open={isModalOpen}
+          onClose={handleClose}
+        >
+          <div className={styles.modal_content}>
+            <Timer />
+          </div>
+        </Modal>
       </div>
     </div>
   );
