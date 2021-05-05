@@ -87,7 +87,7 @@ const Timer = () => {
   };
 
   useEffect(() => {
-    if (intervalRef !== null && count === 0) {
+    if (intervalRef.current !== null && count === 0) {
       dispatch(totalTimeSum(selectedTodo));
       dispatch(resetTime());
       stop();
